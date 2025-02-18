@@ -1,6 +1,41 @@
-该项目是基于硅基流动+智普搜索的一个ai联网插件，目前支持的模型有如下：<br>
+该项目是基于硅基流动+智普搜索的一个ai联网插件，目前支持的联网模型有如下：<br>
 
 ![image](https://github.com/user-attachments/assets/1764828b-0685-4e42-8755-f6cdb29bcd2b)
+
+## 原理
+1.用户请求插件api<br>
+2.插件给用户的提问请求添加一个func call格式如下，并转发请求给硅基流动<br>
+```
+{
+	"model": "Qwen/Qwen2.5-72B-Instruct",
+	"messages": [{
+			"role": "user",
+			"content": "英伟达最新的显卡型号"
+		}
+
+	],
+	"stream": true,
+	"temperature": 0.6,
+	"tools": [{
+		"function": {
+			"description": "The function sends a query to the browser and returns relevant results based on the search terms provided. The model should avoid using this function if it already possesses the required information or can provide a confident answer without external data",
+			"name": "searchOnline",
+			"parameters": {
+				"query": {
+					"description": "What to search for",
+					"type": "string"
+				}
+			},
+			"required": ["searchContent"]
+		},
+		"type": "function"
+	}]
+
+}
+```
+<br>
+3.根据硅基流动响应判断是否调用了func call，如果没调用那么直接将硅基流动的响应发送给客户端<br>
+4.如果func call调用了，那么将参数提取，请求智普搜索api，然后将搜索内容响应给客户端，并携带搜索内容重新请求硅基流动，最后将硅基流动响应转发给客户端<br>
 
 ## 兼容性
 测试了chatbox客户端实测没问题，别的客户端理论上应该也是兼容的。
@@ -33,6 +68,24 @@ chatbox使用了本插件后提问效果：<br>
 如果下载代码运行确保电脑上安装了go环境，然后用命令行切换到项目根目录下执行 go run main.go<br>
 
 或者下载releases中打包好的二进制文件，直接运行就行了。
+
+## 使用方法
+与gpt使用方法一致，无需传入Authorization
+```bash
+curl -X POST http://127.0.0.1:8000/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "Qwen/Qwen2.5-32B-Instruct",
+    "messages": [
+        {
+            "role": "user",
+            "content": "帮我在浏览器查询一下东北的美食有哪些"
+        }
+    ],
+    "stream":true,
+   "temperature": 0.6
+}' 
+```
 
 
 
