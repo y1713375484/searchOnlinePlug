@@ -1,6 +1,24 @@
 该项目是基于硅基流动+智普搜索的一个ai联网插件，目前支持的联网模型有如下：<br>
 
-![image](https://github.com/user-attachments/assets/1764828b-0685-4e42-8755-f6cdb29bcd2b)
+Deepseek 系列：<br>
+deepseek-ai/DeepSeek-V2.5<br>
+deepseek-ai/DeepSeek-V3<br>
+
+书生系列：<br>
+internlm/internlm2_5-20b-chat<br>
+internlm/internlm2_5-7b-chat<br>
+Pro/internlm/internlm2_5-7b-chat<br>
+
+Qwen系列：<br>
+Qwen/Qwen2.5-72B-Instruct<br>
+Qwen/Qwen2.5-32B-Instruct<br>
+Qwen/Qwen2.5-14B-Instruct<br>
+Qwen/Qwen2.5-7B-Instruct<br>
+Pro/Qwen/Qwen2.5-7B-Instruct<br>
+
+GLM 系列：<br>
+THUDM/glm-4-9b-chat<br>
+Pro/THUDM/glm-4-9b-chat<br>
 
 ## 原理
 1.用户请求插件api<br>
