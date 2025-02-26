@@ -11,6 +11,12 @@
 ### 兼容性
 目前测试过chatbox是完全兼容的，其他遵循openAI格式的客户端原则上是都兼容的
 
+**chatbox配置方法**
+
+![WechatIMG1289](https://github.com/user-attachments/assets/49b69db0-f119-477e-9a9a-b5c8041681d6)
+
+
+
 ### 效果
 ![12141739862175_ pic_hd](https://github.com/user-attachments/assets/85458b54-25f0-41db-81f0-09fa78e079b6)<br><br>
 这是大模型为联网之前，无法查询到最新的联网信息<br><br>
