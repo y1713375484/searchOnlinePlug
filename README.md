@@ -24,14 +24,20 @@ deepseek-ai/DeepSeek-V2.5
 
 #### 书生系列：<br>
 internlm/internlm2_5-20b-chat
+
 internlm/internlm2_5-7b-chat
+
 Pro/internlm/internlm2_5-7b-chat
 
 #### Qwen系列：<br>
 Qwen/Qwen2.5-72B-Instruct
+
 Qwen/Qwen2.5-32B-Instruct
+
 Qwen/Qwen2.5-14B-Instruct
+
 Qwen/Qwen2.5-7B-Instruct
+
 Pro/Qwen/Qwen2.5-7B-Instruct
 
 #### GLM 系列：<br>
