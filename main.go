@@ -92,9 +92,19 @@ type Tools []struct {
 }
 
 func main() {
+	// 打开或创建日志文件
+	file, err := os.OpenFile("searchOnline.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+
+	// 设置日志输出到文件
+	log.SetOutput(file)
+
 	r := gin.Default()
 	//加载env配置文件
-	err := godotenv.Load()
+	err = godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
@@ -112,12 +122,12 @@ func main() {
 	}
 	for k, v := range envMap {
 		if v == "" {
-			fmt.Println("请检查根目录下env文件中" + k + "填写情况")
+			log.Println("请检查根目录下env文件中" + k + "填写情况")
 			return
 		}
 	}
 	r.POST("/v1/chat/completions", Action)
-	r.Run() // 监听并在 0.0.0.0:8080 上启动服务
+	r.Run(":8000")
 
 }
 
@@ -163,6 +173,7 @@ func Action(c *gin.Context) {
 	byteData, err := json.Marshal(data)
 	if err != nil {
 		fmt.Println(err)
+		log.Println(err)
 	}
 	response := PostApi(apiUrl, byteData) //转发用户请求给硅基流动
 
@@ -245,6 +256,7 @@ func Action(c *gin.Context) {
 			marshal, err := json.Marshal(errMap)
 			if err != nil {
 				fmt.Println(err)
+				log.Println(err)
 			}
 			rData := "data: " + string(marshal) + "\n\n"
 			c.Writer.Write([]byte(rData))
@@ -261,10 +273,12 @@ func Action(c *gin.Context) {
 		err := json.Unmarshal([]byte(arguments), &argumentsJson)
 		if err != nil {
 			fmt.Println(err)
+			log.Println(err)
 		}
 		searchOnline, err := SearchOnline(argumentsJson.Query)
 		if err != nil {
 			fmt.Println(err)
+			log.Println(err)
 		}
 		searchResult := searchOnline.Choices[0].Message.Tool_calls[1].Search_result
 		for _, result := range searchResult {
@@ -298,6 +312,7 @@ func Action(c *gin.Context) {
 		marshal, err := json.Marshal(data)
 		if err != nil {
 			fmt.Println(err)
+			log.Println(err)
 		}
 		resp := PostApi(apiUrl, marshal) //携带联网查询后的结果重新请求硅基流动模型
 		defer resp.Body.Close()
@@ -330,6 +345,7 @@ func SearchOnline(query string) (SearchOnlineStruct, error) {
 	marshal, err := json.Marshal(searchJson)
 	if err != nil {
 		fmt.Println(err)
+		log.Println(err)
 		return SearchOnlineStruct{}, err
 	}
 	request, err := http.NewRequest("POST", searchApiUrl, bytes.NewReader(marshal))
@@ -359,6 +375,7 @@ func PostApi(url string, data []byte) *http.Response {
 	request, err := http.NewRequest("POST", url, bytes.NewReader(data))
 	if err != nil {
 		fmt.Println(err)
+		log.Println(err)
 	}
 	request.Header.Set("Content-Type", "application/json")
 	request.Header.Set("Authorization", fmt.Sprintf("Bearer %s", apiKey))
@@ -366,6 +383,7 @@ func PostApi(url string, data []byte) *http.Response {
 	response, err := client.Do(request)
 	if err != nil {
 		fmt.Println(err)
+		log.Println(err)
 	}
 	return response
 }
