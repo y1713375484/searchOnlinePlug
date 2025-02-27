@@ -9,20 +9,22 @@
 - **日志记录**：所有操作和错误信息都会被记录到日志文件中，便于调试和问题排查。
 
 ### 兼容性
-目前测试过chatbox是完全兼容的，其他遵循openAI格式的客户端原则上是都兼容的
+目前测试过chatbox、cherry studio是完全兼容的，其他遵循openAI格式的客户端原则上是都兼容的
 
 **chatbox配置方法**
-
-![WechatIMG1289](https://github.com/user-attachments/assets/49b69db0-f119-477e-9a9a-b5c8041681d6)
+![WechatIMG1289](/pubic/1.png)
 
 
 
 ### 效果
-![12141739862175_ pic_hd](https://github.com/user-attachments/assets/85458b54-25f0-41db-81f0-09fa78e079b6)<br><br>
+![12141739862175_ pic_hd](/pubic/2.jpg)<br><br>
 这是大模型为联网之前，无法查询到最新的联网信息<br><br>
-![12121739862135_ pic](https://github.com/user-attachments/assets/45b57d25-fedd-4bcb-8840-6cf0afe631a7)
-![12131739862154_ pic](https://github.com/user-attachments/assets/577e288b-bc05-4687-814a-c3b55d8e94b3)
-这是大模型联网后的效果，可以查询到最新的联网信息，并且可以列出相关的文章信息以及链接
+![12121739862135_ pic](/pubic/3.jpg)
+![12131739862154_ pic](/pubic/4.jpg)
+这是大模型联网后的效果，可以查询到最新的联网信息，并且可以列出相关的文章信息以及链接<br><br>
+![12131739862154_ pic](/pubic/5.jpg)
+这是在cherry studio画图的效果
+
 
 ### 支持的模型有
 #### Deepseek 系列：<br>
