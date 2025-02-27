@@ -1,10 +1,11 @@
-# DeepSeek 联网插件
+# DeepSeek 联网、画图插件
 
-这是一个为硅基流动大模型（DeepSeek）设计的联网插件，允许模型通过调用外部API进行实时信息查询。该插件通过HTTP请求与外部API交互，并将查询结果返回给模型，以便模型能够提供最新的信息和数据。
+这是一个为硅基流动大模型（DeepSeek）设计的联网、画图插件，允许模型通过调用外部API进行实时信息查询。该插件通过HTTP请求与外部API交互，并将查询结果返回给模型，以便模型能够提供最新的信息和数据。
 
 ## 功能
 
 - **实时信息查询**：通过调用外部API，模型可以实时获取最新的信息。
+- **图片绘画**：通过调用https://pollinations.ai/的绘画接口进行的画图
 - **插件集成**：插件与硅基流动大模型无缝集成，支持通过函数调用（Function Calling）机制触发查询。
 - **日志记录**：所有操作和错误信息都会被记录到日志文件中，便于调试和问题排查。
 
@@ -102,6 +103,7 @@ Pro/THUDM/glm-4-9b-chat
 ```bash
 curl -X POST http://127.0.0.1:8000/v1/chat/completions \
   -H "Content-Type: application/json" \
+  -H "Authorization: Bearer your-api-key" \
   -d '{
   "model": "deepseek-ai/DeepSeek-V2.5",
   "messages": [
@@ -118,7 +120,7 @@ curl -X POST http://127.0.0.1:8000/v1/chat/completions \
 
 **响应**：
 
-响应为流式输出，包含模型生成的文本或联网查询的结果。
+响应为流式输出，包含模型生成的文本、图片或联网查询的结果。
 
 ## 日志
 
